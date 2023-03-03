@@ -41,7 +41,13 @@ This method you can suse thi apprach.  <br />
    return( $queryPost );
   
    }
-
+   
+   // Usage: 
+   $post_id = get_wp_current_author_post_user_id();
+   
+   // checking !
+   var_dump($post_id);
+   
 ```
 
 
