@@ -23,7 +23,7 @@ This method you can suse thi apprach.  <br />
 ```PHP
 
   // Get User ID By Post in Page 
-  function get_wp_current_author_post_user_id() {
+  function get_wp_current_post_and_auth_id( $post_id ) {
 	 
 	$queryPost = new WP_Query([
 	   
@@ -35,15 +35,19 @@ This method you can suse thi apprach.  <br />
 		
 	]);  
   
-   $queryPost = json_decode(json_encode( $queryPost ), true);
-   $queryPost = $queryPost["posts"][0]["post_author"];
-  
-   return( $queryPost );
+     $queryPost 	= json_decode(json_encode( $queryPost ), true);
+     $queryPost_auth_id = $queryPost["posts"][0]["post_author"]; 
+     $queryPost_id      = $queryPost["posts"][0]["ID"];
+ 	
+       if(  $post_id !== false ) { return($queryPost_id );}
+       else { return($queryPost_auth_id);  }
   
    }
    
    // Usage: 
-   $post_id = get_wp_current_author_post_user_id();
+   $post_id = get_wp_current_post_and_auth_id(); // Get Post USER ID
+   
+   $post_id = get_wp_current_post_and_auth_id(true); // Get Post ID
    
    // checking !
    var_dump($post_id);
