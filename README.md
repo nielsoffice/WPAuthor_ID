@@ -54,7 +54,41 @@ This method you can suse thi apprach.  <br />
    
 ```
 
+```PHP
+// Usage display Categories to page!
+<?php
 
+ $pa_id = get_wp_current_post_and_auth_id();
+ $user_mate_global = get_user_meta($pa_id );
+
+ $email = $user_mate_global["nickname"][0]?? '';
+
+ $categories = get_the_category(  get_wp_current_post_and_auth_id(true) ); 
+		
+?>
+```
+
+```HTML
+<ul id="auth_info">
+	<li>Email: <span id="author_email"><?php echo($email); ?></span></li>	
+    <?php  
+	
+	foreach(  $categories as $cat_name ) 
+	{ echo ('<li class="cat_'.$cat_name->cat_ID.'"> | Post Categories and Tags : <a href="https://sellerbites.com/newsletter/archive/">' . $cat_name->cat_name . '</a></li> '); }	?>
+	
+</ul>	 
+
+```
+
+```PHP
+ 
+  $tags = wp_get_post_terms( get_the_ID(), 'post_tag' );	
+
+  foreach(  $tags as $tag ) 	
+		 		
+  { print('<li class="cat_'.$tag->term_id.'"><a href="https://sellerbites.com/tag/'.$tag->slug.'/"  rel="tag"> '. $tag->name .' </a></li> '); }	
+
+```
 
 
 
