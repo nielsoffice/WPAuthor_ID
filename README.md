@@ -81,7 +81,7 @@ This method you can suse thi apprach.  <br />
 ```
 
 ```PHP
- 
+  // Reference: https://github.com/nielsoffice/WPTag_CTP
   $tags = wp_get_post_terms( get_the_ID(), 'post_tag' );	
 
   foreach(  $tags as $tag ) 	
