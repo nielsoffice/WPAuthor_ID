@@ -8,7 +8,7 @@ the current post author ID.
 Page ID => Developer account which normally 1 <br />
 Post ID => Author or writter create a post   <br />
 
-If you use global $post;  you will take the page ID which made by developer  
+If you use global $post;  you will take the page ID which usually made by developer  
 and if you use that ID it will reflect the developer user meta not the post author here is interesting things? 
 What if yuou have multitple author? and user information or user_meta() must be display on a page that base on the current author post? 
 
@@ -18,12 +18,12 @@ Post 1 by author 2 | in about page reflect Post 1 and author 2 information  <br 
 Post 2 by author 3 | in about page reflect Post 2 and author 3 information  <br />
 Post 3 by author 7 | in about page reflect Post 3 and author 7 information  <br />
 
-This method you can suse thi apprach.  <br />
+This method you can use this apprach.  <br />
 
 ```PHP
 
   // Get User ID By Post in Page 
-  function get_wp_current_post_and_auth_id( $post_id ) {
+  function get_wp_current_post_and_auth_id( $post_id = false ) {
 	 
 	$queryPost = new WP_Query([
 	   
@@ -74,7 +74,7 @@ This method you can suse thi apprach.  <br />
     <?php  
 	
 	foreach(  $categories as $cat_name ) 
-	{ echo ('<li class="cat_'.$cat_name->cat_ID.'"> | Post Categories and Tags : <a href="https://sellerbites.com/newsletter/archive/">' . $cat_name->cat_name . '</a></li> '); }	?>
+	{ echo ('<li class="cat_'.$cat_name->cat_ID.'"> | Post Categories and Tags : <a href="#">' . $cat_name->cat_name . '</a></li> '); }	?>
 	
 </ul>	 
 
@@ -82,11 +82,12 @@ This method you can suse thi apprach.  <br />
 
 ```PHP
   // Reference: https://github.com/nielsoffice/WPTag_CTP
-  $tags = wp_get_post_terms( get_the_ID(), 'post_tag' );	
+  $post_author_id = get_wp_current_post_and_auth_id();
+  $tags = wp_get_post_terms( post_author_id, 'post_tag' );	
 
   foreach(  $tags as $tag ) 	
 		 		
-  { print('<li class="cat_'.$tag->term_id.'"><a href="https://sellerbites.com/tag/'.$tag->slug.'/"  rel="tag"> '. $tag->name .' </a></li> '); }	
+  { print('<li class="cat_'.$tag->term_id.'"><a href="https://< domain >/tag/'.$tag->slug.'/"  rel="tag"> '. $tag->name .' </a></li> '); }	
 
 ```
 
